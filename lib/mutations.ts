@@ -8,7 +8,15 @@ export const CREATE_USER = gql`
       firstName
       lastName
       role
+      isActive
+      createdAt
     }
+  }
+`;
+
+export const REMOVE_USER = gql`
+  mutation RemoveUser($id: String!) {
+    removeUser(id: $id)
   }
 `;
 
@@ -22,6 +30,28 @@ export const CREATE_SHIFT = gql`
       title
       description
       maxAssignments
+      isRecurring
+      createdAt
+    }
+  }
+`;
+
+export const REMOVE_SHIFT = gql`
+  mutation RemoveShift($id: String!) {
+    removeShift(id: $id)
+  }
+`;
+
+export const REPEAT_SHIFT = gql`
+  mutation RepeatShift($repeatShiftInput: RepeatShiftInput!) {
+    repeatShift(repeatShiftInput: $repeatShiftInput) {
+      id
+      date
+      title
+      startTime
+      endTime
+      maxAssignments
+      isRecurring
     }
   }
 `;
@@ -36,11 +66,14 @@ export const ASSIGN_USER_TO_SHIFT = gql`
         id
         firstName
         lastName
+        email
       }
       shift {
         id
         title
         date
+        startTime
+        endTime
       }
     }
   }
@@ -52,29 +85,23 @@ export const REMOVE_ASSIGNMENT = gql`
   }
 `;
 
-export const REPEAT_SHIFT = gql`
-  mutation RepeatShift($repeatShiftInput: RepeatShiftInput!) {
-    repeatShift(repeatShiftInput: $repeatShiftInput) {
-      id
-      date
-      title
-      isRecurring
-    }
-  }
-`;
-
 export const MARK_UNAVAILABLE = gql`
   mutation MarkUnavailable($createUnavailabilityInput: CreateUnavailabilityInput!) {
     markUnavailable(createUnavailabilityInput: $createUnavailabilityInput) {
       id
       reason
       status
+      createdAt
+      user {
+        id
+        firstName
+        lastName
+      }
+      shift {
+        id
+        title
+        date
+      }
     }
-  }
-`;
-
-export const REMOVE_SHIFT = gql`
-  mutation RemoveShift($id: String!) {
-    removeShift(id: $id)
   }
 `;
