@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER, GET_USERS } from '@/lib/mutations';
+import { CREATE_USER } from '@/lib/mutations';
+import {GET_USERS } from '@/lib/queries';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
