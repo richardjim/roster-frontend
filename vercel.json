@@ -3,5 +3,8 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_GRAPHQL_URL": "https://roster-backend-hwy1.onrender.com/graphql"
+  }
 }
