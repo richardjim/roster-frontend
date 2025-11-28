@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mini Roster System - Frontend
 
-## Getting Started
+A modern, responsive frontend for the shift scheduling system built with Next.js, Apollo Client, and TailwindCSS.
 
-First, run the development server:
+## Features
 
+- ✅ Dashboard with overview statistics
+- ✅ Shift listing with filtering
+- ✅ Create new shifts
+- ✅ View shift details
+- ✅ Assign users to shifts
+- ✅ Remove assignments
+- ✅ User management
+- ✅ Responsive design
+- ✅ Real-time updates with GraphQL
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: TailwindCSS
+- **GraphQL Client**: Apollo Client
+- **Icons**: Lucide React
+- **Date Handling**: date-fns
+
+## Prerequisites
+
+- Node.js (v18 or higher)
+- Backend API running (see backend README)
+
+## Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd roster-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configure environment variables:
+```bash
+cp .env.local.example .env.local
+# Edit .env.local with your backend GraphQL URL
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Development (.env.local)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NEXT_PUBLIC_GRAPHQL_URL=http://localhost:4000/graphql
 
-## Deploy on Vercel
+### Production (.env.production)
+NEXT_PUBLIC_GRAPHQL_URL=https://
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
+roster-frontend/
+├── app/                    # Next.js app directory
+│   ├── layout.tsx         # Root layout with navigation
+│   ├── page.tsx           # Dashboard
+│   ├── shifts/            # Shift-related pages
+│   └── users/             # User-related pages
+├── components/            # Reusable components
+│   ├── providers/         # Context providers
+│   ├── ui/               # UI components
+│   ├── shifts/           # Shift components
+│   └── users/            # User components
+├── lib/                  # Utility functions
+│   ├── apollo-client.ts  # Apollo client setup
+│   ├── queries.ts        # GraphQL queries
+│   ├── mutations.ts      # GraphQL mutations
+│   └── utils.ts          # Helper functions
+└── types/                # TypeScript types
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Available Pages
+
+### Dashboard (/)
+- Overview statistics
+- Open shifts list
+- Upcoming shifts (next 7 days)
+
+### Shifts (/shifts)
+- List all shifts
+- Filter by date range
+- Filter by open shifts only
+- Create new shift button
+
+### Shift Detail (/shifts/[id])
+- View shift details
+- See assigned users
+- Assign users to shift
+- Remove assignments
+- Delete shift
+
+### Create Shift (/shifts/create)
+- Form to create new shifts
+- Date and time selection
+- Set maximum assignments
+
+### Users (/users)
+- View all active users
+- See user roles
+
+## Key Features
+
+### Filtering Shifts
+- Filter by start date
+- Filter by end date
+- Show only open shifts
+
+### Managing Assignments
+- Assign users to shifts
+- Prevent double assignments
+- Check shift capacity
+- Remove assignments
+
+### Validation
+- Client-side form validation
+- Error messages from API
+- Loading states
+
+## Deployment to Vercel
+
+1. Push your code to GitHub
+
+2. Go to [Vercel](https://vercel.com) and import your repository
+
+3. Configure environment variables:
+   - `NEXT_PUBLIC_GRAPHQL_URL`: Your backend GraphQL endpoint
+
+4. Deploy!
+
+## Development Tips
+
+### Hot Reload
+Changes to files will automatically reload the page.
+
+### GraphQL Queries
+All queries and mutations are in `lib/queries.ts` and `lib/mutations.ts`.
+
+### Styling
+Use TailwindCSS utility classes for styling. Custom components are in `components/ui/`.
+
+### Type Safety
+TypeScript types are defined in `types/index.ts`.
+
+## Troubleshooting
+
+### GraphQL Connection Issues
+- Ensure backend is running
+- Check `NEXT_PUBLIC_GRAPHQL_URL` in `.env.local`
+- Verify CORS is enabled on backend
+
+### Build Errors
+- Clear `.next` folder: `rm -rf .next`
+- Reinstall dependencies: `rm -rf node_modules && npm install`
+
+## License
+
+MIT
